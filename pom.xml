@@ -41,7 +41,7 @@
 			<version>1.4.181</version>
 		</dependency>
 
-		<!-- Needed for datasource implementation -->
+		<!-- Needed for datasource class implementation -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
@@ -62,6 +62,14 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
 		</dependency>
+
+		<!-- Fix Liquibase's unique logging -->
+		<dependency>
+			<groupId>com.mattbertolini</groupId>
+			<artifactId>liquibase-slf4j</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
 	</dependencies>
 
 

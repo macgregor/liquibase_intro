@@ -1,5 +1,9 @@
-Liquibase Spring Integration: http://www.liquibase.org/documentation/spring.html
-Liquibase Quickstart: http://www.liquibase.org/quickstart.html
+Liquibase Spring Integration: 
+	http://www.liquibase.org/documentation/spring.html
+Liquibase Quickstart: 
+	http://www.liquibase.org/quickstart.html
+Liquibase's Weird Log formatting:
+	http://blog.projectnibble.org/2013/12/29/fixing-liquibase-logging-in-spring/
 
 Transaction issues:
 org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [insert into person(id, name) values(0, 'Matt')]; nested exception is org.h2.jdbc.JdbcSQLException: Table "PERSON" not found; SQL statement:
