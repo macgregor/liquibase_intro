@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/app-context.xml")
-@TransactionConfiguration(defaultRollback=false) 
 public class LiquibaseTests {
 	static Logger log = Logger.getLogger(LiquibaseTests.class);
 	
@@ -24,8 +22,7 @@ public class LiquibaseTests {
 	public void setDataSource(DataSource dataSource) {
 	      this.dataSource = dataSource;
 	      this.jdbcTemplate = new JdbcTemplate(this.dataSource);
-	   }
-	
+	}
 	
 	@Test
 	public void testTableExists(){
