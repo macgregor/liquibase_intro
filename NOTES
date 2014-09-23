@@ -58,7 +58,9 @@ insert into person(id, name) values(0, 'Matt') [42102-181]
 	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:429)
 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:402)
 	... 31 more
-Caused by:
-	datsource class org.springframework.jdbc.datasource.DriverManagerDataSource
+	
+Root cause:
+	datsource class org.springframework.jdbc.datasource.DriverManagerDataSource is causing transaction boundary issues with Spring Unit test
+	wasnt able to fix by explicitly specifying transaction manager or disabling rollback on the unit tests
 Fix:
-	Changed to org.apache.commons.dbcp.BasicDataSource and it fixed things
+	Changed datasource class to org.apache.commons.dbcp.BasicDataSource
