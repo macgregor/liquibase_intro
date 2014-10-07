@@ -5,9 +5,9 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<changeSet id="1412646807414421601_create_person_seq" author="mstratto">
-		<comment>Creating person id sequence</comment>
-		<createSequence schemaName="${schema}" sequenceName="person_id_seq" />
+	<changeSet id="1412649247585966031_create_address_seq" author="mstratto">
+		<comment>Creating address id sequence</comment>
+		<createSequence schemaName="${schema}" sequenceName="address_id_seq" />
 	</changeSet>
 
 </databaseChangeLog>

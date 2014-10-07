@@ -5,15 +5,18 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<changeSet id="1412557603288_create_address" author="mstratto">
+	<changeSet id="1412646845325091749_create_address" author="mstratto">
 		<comment>Create address table</comment>
 		<createTable tableName="address" schemaName="${schema}">
 			<column name="id" type="int">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="name" type="varchar(50)">
+			<column name="street" type="varchar(256)">
 				<constraints nullable="false" />
 			</column>
+			<column name="city" type="varchar(50)" />
+			<column name="state" type="varchar(2)" />
+			<column name="zip" type="varchar(5)" />
 		</createTable>
 	</changeSet>
 

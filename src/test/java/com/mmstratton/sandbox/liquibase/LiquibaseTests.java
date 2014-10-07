@@ -1,12 +1,12 @@
 package com.mmstratton.sandbox.liquibase;
 
-import javax.sql.DataSource;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -16,26 +16,35 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class LiquibaseTests {
 	static Logger log = Logger.getLogger(LiquibaseTests.class);
 	
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
-	
-	//inject datasource and initialize JDBC template so we can work with the database
 	@Autowired
-	public void setDataSource(DataSource dataSource) {
-	      this.dataSource = dataSource;
-	      this.jdbcTemplate = new JdbcTemplate(this.dataSource);
-	}
+	private AddressDao addressDao;
+	
+	@Autowired
+	private PersonDao personDao;
+	
+	private static final String NAME = "Kilgore Trout";
+	private static final int AGE = 50;
+	private static final String STREET = "42 Northshire Ln";
+	private static final String CITY = "Ilium";
+	private static final String STATE = "NY";
+	private static final String ZIP = "12179";	
 	
 	@Test
-	public void testTableExists(){
-		//exception will be thrown if there is a problem
-		jdbcTemplate.execute("insert into person(id, name) values(0, 'Matt')");		
-	}
-	
-	@Test
-	public void getTimestamp(){
-		long timestamp = System.currentTimeMillis();
-		System.out.println(timestamp);
-		log.info(timestamp);
+	public void testDataModel(){
+		int personId = personDao.createPersonWithAddress(NAME, AGE, STREET, CITY, STATE, ZIP);
+		
+		Assert.assertEquals(1, personId);
+		
+		Map<String, Object> personAddress = personDao.getPersonWithAddress(personId);
+		
+		Assert.assertNotNull(personAddress);
+		Assert.assertEquals(7, personAddress.size());
+		Assert.assertEquals(personId, personAddress.get("id"));
+		Assert.assertEquals(NAME, personAddress.get("name"));
+		Assert.assertEquals(AGE, personAddress.get("age"));
+		Assert.assertEquals(STREET, personAddress.get("street"));
+		Assert.assertEquals(CITY, personAddress.get("city"));
+		Assert.assertEquals(STATE, personAddress.get("state"));
+		Assert.assertEquals(ZIP, personAddress.get("zip"));
 	}
 }

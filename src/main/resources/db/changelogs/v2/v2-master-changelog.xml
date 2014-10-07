@@ -6,8 +6,8 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 	<!-- Includes all change logs for this release -->
-	<include relativeToChangelogFile="true" file="1411483541617686993_create_person.xml"/>
-	<include relativeToChangelogFile="true" file="1412555576369_update_person.xml"/>
-	<include relativeToChangelogFile="true" file="1412557269317_create_person_id_seq.xml"/>
-	<include relativeToChangelogFile="true" file="1412557603288_create_address.xml"/>
+	<include relativeToChangelogFile="true" file="1412646686488852632_update_person.xml"/>
+	<include relativeToChangelogFile="true" file="1412646807414421601_create_person_id_seq.xml"/>
+	<include relativeToChangelogFile="true" file="1412646845325091749_create_address.xml"/>
+	<include relativeToChangelogFile="true" file="1412649247585966031_create_address_id_seq.xml"/>
 </databaseChangeLog>
