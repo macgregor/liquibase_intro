@@ -5,6 +5,10 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+	<property name="schema" value="public"/>
+
 	<!-- Includes master changelogs for each release -->
 	<include relativeToChangelogFile="true" file="v1/v1-master-changelog.xml"/>
+	<include relativeToChangelogFile="true" file="v2/v2-master-changelog.xml"/>
+	<include relativeToChangelogFile="true" file="schema/views/views-master-changelog.xml"/>
 </databaseChangeLog>

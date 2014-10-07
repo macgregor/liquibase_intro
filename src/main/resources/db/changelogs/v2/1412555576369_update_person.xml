@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="1412555576369_add_age" author="mstratto">
+		<comment>Add age column to person table</comment>
+		<addColumn schemaName="${schema}" tableName="person">
+	       <column name="age" type="int"/>
+	   </addColumn>
+	</changeSet>
+	
+		<changeSet id="1412555576369_add_address" author="mstratto">
+		<comment>Add foreign key column for Address to person table</comment>
+		<addColumn schemaName="${schema}" tableName="person">
+	       <column name="address_fk" type="int"/>
+	   </addColumn>
+	</changeSet>
+
+</databaseChangeLog>

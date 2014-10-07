@@ -31,4 +31,11 @@ public class LiquibaseTests {
 		//exception will be thrown if there is a problem
 		jdbcTemplate.execute("insert into person(id, name) values(0, 'Matt')");		
 	}
+	
+	@Test
+	public void getTimestamp(){
+		long timestamp = System.currentTimeMillis();
+		System.out.println(timestamp);
+		log.info(timestamp);
+	}
 }

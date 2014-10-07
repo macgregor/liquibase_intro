@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<!-- Includes all change logs for this release -->
+	<include relativeToChangelogFile="true" file="1411483541617686993_create_person.xml"/>
+	<include relativeToChangelogFile="true" file="1412555576369_update_person.xml"/>
+	<include relativeToChangelogFile="true" file="1412557269317_create_person_id_seq.xml"/>
+	<include relativeToChangelogFile="true" file="1412557603288_create_address.xml"/>
+</databaseChangeLog>
