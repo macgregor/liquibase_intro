@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,20 @@ public class LiquibaseTests {
 	private static final String STATE = "NY";
 	private static final String ZIP = "12179";	
 	
+	@BeforeClass
+	public static void setSystemProps() {
+		//set property file to use for test to postgres.properties if it is not already set
+		System.setProperty("property.file", System.getProperty("property.file", "h2.properties"));
+		System.setProperty("spring.profiles.active", System.getProperty("spring.profiles.active", "spring"));
+		
+	    //System.setProperty("property.file", "postgres.properties");
+	    //System.setProperty("spring.profiles.active", "none");
+	}
+	
 	@Test
 	public void testDataModel(){
-		int personId = personDao.createPersonWithAddress(NAME, AGE, STREET, CITY, STATE, ZIP);
 		
-		Assert.assertEquals(1, personId);
+		int personId = personDao.createPersonWithAddress(NAME, AGE, STREET, CITY, STATE, ZIP);
 		
 		Map<String, Object> personAddress = personDao.getPersonWithAddress(personId);
 		

@@ -34,11 +34,20 @@
 			<version>4.1.0.RELEASE</version>
 		</dependency>
 
+		<!-- Postgresql JDBC Driver -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1102-jdbc41</version>
+		</dependency>
+
+
 		<!-- H2 In Memory Database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.181</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Needed for datasource class implementation -->
@@ -72,6 +81,23 @@
 
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>pg</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<property.file>postgres.properties</property.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>h2</id>
+			<properties>
+				<property.file>h2.properties</property.file>
+			</properties>
+		</profile>
+	</profiles>
 
 	<!-- Running Liquibase manually -->
 	<build>
@@ -80,12 +106,9 @@
 				<plugin>
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-maven-plugin</artifactId>
-					<version>3.0.5</version>
+					<version>3.1.0</version>
 					<configuration>
-						<propertyFile>src/main/resources/liquibase.properties</propertyFile>
-						<changeLogFile>src/main/resources/db/changelogs/master-changelog.xml</changeLogFile>
-						<driver>org.h2.Driver</driver>
-						<url>jdbc:h2:mem:liquibase</url>
+						<propertyFile>src/main/resources/${property.file}</propertyFile>
 					</configuration>
 					<executions>
 						<execution>
@@ -95,6 +118,27 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.surefire</groupId>
+							<artifactId>surefire-junit4</artifactId>
+							<version>2.7.2</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<includes>
+							<include>**/*Tests.java</include>
+						</includes>
+						<systemPropertyVariables>
+							<LiquibaseTests.java></LiquibaseTests.java>
+							<property.file>${property.file}</property.file>
+							<spring.profiles.active>default</spring.profiles.active>
+						</systemPropertyVariables>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
