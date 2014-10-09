@@ -6,10 +6,11 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 	<context:component-scan base-package="com.mmstratton.sandbox.liquibase" />
+	
+	<!-- load properties file dynamically based on property.file system property (set at runtime) -->
 	<context:property-placeholder location="${property.file}" />
 
-
-	<!-- Connection to our in memory database -->
+	<!-- Connection to our database -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${driver}" />
 		<property name="url" value="${url}" />
@@ -21,7 +22,7 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 
-	<!-- Run liquibase migration when the application starts -->
+	<!-- only run Liquibase when the "spring" profile is active -->
 	<beans profile="spring">
 		<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
 			<property name="dataSource" ref="dataSource" />

@@ -82,6 +82,7 @@
 	</dependencies>
 
 	<profiles>
+		<!-- use Postgres datasource configuration (default) -->
 		<profile>
 			<id>pg</id>
 			<activation>
@@ -91,6 +92,7 @@
 				<property.file>postgres.properties</property.file>
 			</properties>
 		</profile>
+		<!-- use h2 datasource configuration -->
 		<profile>
 			<id>h2</id>
 			<properties>
@@ -99,10 +101,10 @@
 		</profile>
 	</profiles>
 
-	<!-- Running Liquibase manually -->
 	<build>
 		<pluginManagement>
 			<plugins>
+				<!-- Running Liquibase manually: mvn liquibase:update -->
 				<plugin>
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-maven-plugin</artifactId>
@@ -119,6 +121,8 @@
 						</execution>
 					</executions>
 				</plugin>
+				
+				<!-- mvn test configtuation -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -133,9 +137,13 @@
 						<includes>
 							<include>**/*Tests.java</include>
 						</includes>
+						<!-- Set system properties based on maven profile -->
 						<systemPropertyVariables>
 							<LiquibaseTests.java></LiquibaseTests.java>
 							<property.file>${property.file}</property.file>
+							
+							<!-- dont use Spring Integration to run Liquibase -->
+							<!-- need to set any value so the unit test doesnt override it when it runs -->
 							<spring.profiles.active>default</spring.profiles.active>
 						</systemPropertyVariables>
 					</configuration>
