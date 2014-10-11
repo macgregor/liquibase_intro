@@ -10,10 +10,20 @@ import org.springframework.stereotype.Service;
 public class AddressDao {
 	static Logger log = Logger.getLogger(AddressDao.class);
 	
-	//inject JDBC template so we can work with the database
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	
+	/**
+	 * Create a new address entity in the database
+	 * 
+	 * @param street
+	 * @param city
+	 * @param state
+	 * @param zip
+	 * @return id of new address entity
+	 * @throws DataAccessException
+	 */
 	public int createAddress(String street, String city, String state, String zip) throws DataAccessException{
 		log.info(String.format("\nCreating address: \n\t%s\n\t%s, %s %s", street, city, state, zip));
 		
