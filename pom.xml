@@ -109,6 +109,14 @@
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-maven-plugin</artifactId>
 					<version>3.1.0</version>
+					<dependencies>
+						<!-- dont forget to fix the ugly log output -->
+						<dependency>
+							<groupId>com.mattbertolini</groupId>
+							<artifactId>liquibase-slf4j</artifactId>
+							<version>1.2.1</version>
+						</dependency>
+					</dependencies>
 					<configuration>
 						<propertyFile>src/main/resources/${property.file}</propertyFile>
 					</configuration>
@@ -121,7 +129,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				
+
 				<!-- mvn test configtuation -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -139,11 +147,11 @@
 						</includes>
 						<!-- Set system properties based on maven profile -->
 						<systemPropertyVariables>
-							<LiquibaseTests.java></LiquibaseTests.java>
 							<property.file>${property.file}</property.file>
-							
+
 							<!-- dont use Spring Integration to run Liquibase -->
-							<!-- need to set any value so the unit test doesnt override it when it runs -->
+							<!-- need to set any value so the unit test doesnt override it when 
+								it runs -->
 							<spring.profiles.active>default</spring.profiles.active>
 						</systemPropertyVariables>
 					</configuration>
