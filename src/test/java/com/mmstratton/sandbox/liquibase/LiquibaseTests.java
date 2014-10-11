@@ -35,7 +35,7 @@ public class LiquibaseTests {
 	 * Need to set system properties configuring datasource before Spring loads the application context
 	 */
 	@BeforeClass
-	public static void setSystemProps() {
+	public static void setSystemProps() {		
 		//set properties if they are not already set
 		System.setProperty("property.file", System.getProperty("property.file", "h2.properties"));
 		System.setProperty("spring.profiles.active", System.getProperty("spring.profiles.active", "spring"));
